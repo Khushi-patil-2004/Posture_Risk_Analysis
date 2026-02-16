@@ -1,6 +1,6 @@
 # Posture Analysis Engine
 A comprehensive system for analyzing posture data and generating recommendations using AI-powered insights. This project combines an input collector for processing logs with a FastAPI-based backend recommendation engine.
-## Project Structure
+## Project Structure 
 Project/
 ├── input_collector/          # Log collection and processing module
 │   ├── main.py              # Main entry point
