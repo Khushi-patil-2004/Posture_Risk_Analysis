@@ -6,8 +6,6 @@ class FrameInput(BaseModel):
     camera_angle: str
     is_calibrated: bool
     data: Dict[str, Any]
-
-
 class SessionStartResponse(BaseModel):
     session_id: str
     start_time_ist: str

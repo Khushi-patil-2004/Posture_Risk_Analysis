@@ -2,9 +2,6 @@ from app.recommendation.rules import METRIC_RULES
 from app.recommendation.ai_engine import generate_ai_recommendation
 from app.recommendation.ai_personalizer import build_personalization_context
 from app.recommendation.config import RISK_THRESHOLDS, TREND_THRESHOLD
-from app.recommendation.explainer import generate_explanation
-
-
 def _compute_trends(session_history):
     trends = {}
 
@@ -41,7 +38,7 @@ def build_recommendation(
     user_profile: dict,
     session_history: list
 ):
-    # 1️⃣ Identify dominant issue
+    #  Identify dominant issue
     dominant_metric = max(
         results.items(),
         key=lambda x: x[1].get("posture_risk_percent", 0)
@@ -59,10 +56,10 @@ def build_recommendation(
         risk_level = "LOW"
         priority = "LOW"
 
-    # 2️⃣ Compute trends
+    # Compute trends
     trends = _compute_trends(session_history)
 
-    # 3️⃣ Try AI personalization
+    #  Try AI personalization
     context = build_personalization_context(
         user_profile=user_profile,
         trends=trends,
@@ -77,24 +74,14 @@ def build_recommendation(
             **ai_output
         }
 
-    # 4️⃣ Fallback (still intelligent)
+    #  Fallback (still intelligent)
     base_actions = METRIC_RULES.get(
         dominant_metric, {}
     ).get("base_actions", [])
 
     if dominant_metric in trends and trends[dominant_metric]["direction"] == "WORSENING":
         base_actions.append("Increase posture breaks frequency")
-    # 5️⃣ Explanation (WHY this posture is risky)
-    explanation_input = {
-        "session_id": session_id,
-        "risk": {
-            "metric": dominant_metric,
-            "risk_level": risk_level,
-            "risk_percent": dominant_risk
-        }
-    }
 
-    explanation = generate_explanation(explanation_input)
 
     return {
         "session_id": session_id,

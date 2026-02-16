@@ -43,7 +43,7 @@ def generate_ai_recommendation(context: dict):
 
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
-        print("⚠️ GROQ_API_KEY not set, skipping AI recommendation")
+        print(" GROQ_API_KEY not set, skipping AI recommendation")
         return None
 
     try:
@@ -91,12 +91,12 @@ JSON FORMAT:
         parsed = _extract_json(raw)
 
         if not parsed:
-            print("⚠️ Groq returned non-JSON response")
+            print(" Groq returned non-JSON response")
             return None
 
-        print("🤖 AI recommendation generated")
+        print(" AI recommendation generated")
         return parsed
 
     except Exception as e:
-        print("⚠️ Groq AI failed, using fallback:", e)
+        print(" Groq AI failed, using fallback:", e)
         return None

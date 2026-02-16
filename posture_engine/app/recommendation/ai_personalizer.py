@@ -1,3 +1,4 @@
+# ai_personalizer.py
 def build_personalization_context(user_profile, trends, results):
     return {
         "user": {
