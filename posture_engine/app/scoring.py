@@ -63,8 +63,14 @@ def process_session(frames):
     # -------- STEP 1: Range-wise time aggregation --------
     for frame in frames:
         view = frame["camera_angle"]
+        is_calibrated = frame.get("is_calibrated", False)
+        
         if view not in SESSION_CONFIG:
             print(f" View '{view}' not in SESSION_CONFIG")
+            continue
+        
+        if not is_calibrated:
+            print(f" View '{view}': Frame not calibrated, skipping")
             continue
 
         for metric, cfg in SESSION_CONFIG[view]["metrics"].items():
