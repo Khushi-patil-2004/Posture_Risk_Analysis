@@ -29,7 +29,6 @@ SESSION_CONFIG = {
             }
         }
     },
-
     "SIDE": {
         "duration_min": 60,
         "metrics": {

@@ -24,7 +24,9 @@ def compute_weighted_score(class_time, valid_time, session_duration):
         band_width = band_end - band_start
 
         # STEP 2: time → session percentage
-        time_percent = time_min / session_duration
+        # time_percent = time_min / session_duration
+        time_percent = time_min / valid_time
+
 
         # STEP 4: score inside band
         score_inside_band = band_start + (time_percent * band_width)
@@ -153,3 +155,4 @@ def process_session(frames):
         }
 
     return results
+
