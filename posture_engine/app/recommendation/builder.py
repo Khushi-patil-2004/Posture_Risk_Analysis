@@ -32,6 +32,16 @@ def _compute_trends(session_history):
     return trend_result
 
 
+def _normalize_metric_key(metric_key: str) -> str:
+    """
+    Convert metric key like 'FRONT_neck_bend_degree' to 'FRONT_neck_bend'
+    for rule lookup.
+    """
+    # Remove suffixes: _degree, _percent, _confidence, _index
+    normalized = metric_key.replace("_degree", "").replace("_percent", "").replace("_confidence", "").replace("_index", "")
+    return normalized
+
+
 def build_recommendation(
     results: dict,
     session_id: str,
@@ -74,9 +84,10 @@ def build_recommendation(
             **ai_output
         }
 
-    #  Fallback (still intelligent)
+    #  Fallback (still intelligent) - normalize metric key to find rules
+    normalized_metric = _normalize_metric_key(dominant_metric)
     base_actions = METRIC_RULES.get(
-        dominant_metric, {}
+        normalized_metric, {}
     ).get("base_actions", [])
 
     if dominant_metric in trends and trends[dominant_metric]["direction"] == "WORSENING":
@@ -89,7 +100,7 @@ def build_recommendation(
         "dominant_issue": dominant_metric,
         "recommendation": {
             "priority": priority,
-            "message": f"Posture issue detected: {METRIC_RULES.get(dominant_metric, {}).get('label', dominant_metric)}.",
+            "message": f"Posture issue detected: {METRIC_RULES.get(normalized_metric, {}).get('label', dominant_metric)}.",
             "actions": base_actions
         }
     }
