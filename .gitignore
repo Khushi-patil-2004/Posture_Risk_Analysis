@@ -1,9 +1,124 @@
-# Environment variables
-.env
-
-# Python cache
+# ===== Python =====
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
 
-# Virtual environment
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
 env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# ===== IDEs and Editors =====
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Spyder
+.spyderproject
+.spyproject
+
+# ===== Environment Variables =====
+.env
+.env.local
+.env.*.local
+*.env
+
+# ===== Database Files =====
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== Log Files =====
+*.log
+logs/
+*.log.*
+
+# ===== Data Files =====
+# Uncomment if you want to ignore data files
+# data/
+# *.jsonl
+# *.csv
+# *.json
+
+# ===== OS-specific =====
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ===== Testing =====
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.hypothesis/
+*.cover
+.cache
+nosetests.xml
+coverage.xml
+
+# ===== Project-specific =====
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Local configuration
+local_settings.py
+instance/
+
+# Secrets and credentials
+secrets/
+credentials/
+*.key
+*.pem
